@@ -14,5 +14,6 @@ RUN apt-get -qq update && apt-get -y install bc vnstat apache2 php libapache2-mo
 
 COPY --from=builder /etc/apache2/ /etc/apache2/
 COPY --from=builder /var/www/ /var/www/
-ENTRYPOINT ["/bin/bash", "-c"]
-CMD ["service apache2 start && tail -f /dev/null"]
+COPY run.sh /run.sh
+ENTRYPOINT ["/bin/bash"]
+CMD ["/run.sh"]
